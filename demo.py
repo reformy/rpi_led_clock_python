@@ -23,7 +23,7 @@ class LedClock:
 
     def show(self, text: str):
         if self.on_rpi:
-            self.seg.text = f'{text[1]}{text[0]}{text[3]}{text[2]}'
+            self.seg.text = f'{text[1]*4}{text[0]*4}{text[3]*4}{text[2]*4}'
         else:
             print(f'Show: "{text}"')
 
