@@ -36,9 +36,11 @@ class LedClock:
         return str(n) if n else ' '
 
     def main(self):
+        last_minute_for_btc = -1
         while True:
             now = datetime.datetime.now()
-            if now.minute % 15 == 0:
+            if now.minute % 15 == 0 and last_minute_for_btc != now.minute:
+                last_minute_for_btc = now.minute
                 self._show_btc()
             else:
                 self._show_time(now)
