@@ -21,15 +21,15 @@ class LedClock:
             device = max7219(serial, cascaded=2)
             self.seg = sevensegment(device)
 
-    def show(self, text: str):
+    def show(self, *cs):
         if self.on_rpi:
-            self.seg.text = f'{text[1]*4}{text[0]*4}{text[3]*4}{text[2]*4}'
+            self.seg.text = f'{cs[1]*4}{cs[0]*4}{cs[3]*4}{cs[2]*4}'
         else:
-            print(f'Show: "{text}"')
+            print(f'Show: "{cs}"')
 
     @staticmethod
     def str_if_not_zero(n: int) -> str:
-        return str(n) if n else ''
+        return str(n) if n else ' '
 
     def main(self):
         while True:
@@ -38,8 +38,10 @@ class LedClock:
             h2 = str(now.hour % 10)
             m1 = str(now.minute // 10)
             m2 = str(now.minute % 10)
-            self.show(f'{h1}{h2}{m1}{m2}')
-            sleep(1)
+            show_dots = now.second % 2 == 1
+            dots_str = '.' if show_dots else ''
+            self.show(h1, h2, m1 + dots_str, m2 + dots_str)
+            sleep(0.2)
 
 
 if __name__ == '__main__':
