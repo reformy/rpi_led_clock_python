@@ -67,8 +67,6 @@ class LedClock:
                 self.show(*'    ')
                 sleep(1)
 
-
-
     def _show_time(self, now):
         h1 = self.str_if_not_zero(now.hour // 10)
         h2 = str(now.hour % 10)
@@ -89,4 +87,4 @@ class LedClock:
 
 
 if __name__ == '__main__':
-    LedClock()._show_btc()
+    LedClock().main()
