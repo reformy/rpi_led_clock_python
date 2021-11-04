@@ -39,7 +39,7 @@ class LedClock:
         last_minute_for_btc = -1
         while True:
             now = datetime.datetime.now()
-            if now.minute % 15 == 0 and last_minute_for_btc != now.minute:
+            if now.minute % 20 == 0 and last_minute_for_btc != now.minute:
                 last_minute_for_btc = now.minute
                 self._show_btc()
             else:
@@ -48,26 +48,29 @@ class LedClock:
 
     def _show_btc(self):
         v = self._get_btc()
+        if v == 0:
+            return
+
         if v <= 9999:
             s = str(v).rjust(4, ' ')
             self.show(*s)
             sleep(10)
         else:
             n_digits = len(str(v))
-            for i_cycle in range(4):
+            for i_cycle in range(3):
                 for i in range(4):
                     fixed_v = v // (10 ** (n_digits - i - 1))
                     s = ' '*(3 - i) + str(fixed_v)
                     self.show(*s)
-                    sleep(1)
+                    sleep(0.5)
 
                 for i in range(n_digits - 4):
                     fixed_v = (v // (10 ** (n_digits - i - 5))) % 10000
                     s = str(fixed_v).rjust(4, '0')
                     self.show(*s)
-                    sleep(1)
+                    sleep(0.5)
                 self.show(*'    ')
-                sleep(1)
+                sleep(0.5)
 
     def _show_time(self, now):
         h1 = self.str_if_not_zero(now.hour // 10)
