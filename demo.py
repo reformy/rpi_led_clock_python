@@ -87,7 +87,7 @@ class LedClock:
         sleep(0.2)
 
     def _show_no_network(self):
-        self.show(*'4 40')
+        self.show(*'404 ')
         sleep(1)
 
     def _get_btc(self) -> int:
