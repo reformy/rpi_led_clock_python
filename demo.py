@@ -46,6 +46,7 @@ class LedClock:
                 self._show_btc()
             elif not self.network and now.second % 5 == 0:
                 self._show_no_network()
+                self._show_btc()
             else:
                 self._show_time(now)
 
@@ -86,13 +87,14 @@ class LedClock:
         sleep(0.2)
 
     def _show_no_network(self):
-        self.show('4 40')
+        self.show(*'4 40')
         sleep(1)
 
     def _get_btc(self) -> int:
         try:
             r = requests.get(url='https://api.coinbase.com/v2/prices/spot?currency=USD')
             v = r.json()['data']['amount']
+            self.network = True
             return int(float(v))
         except ConnectionError:
             self.network = False
