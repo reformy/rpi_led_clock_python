@@ -41,7 +41,7 @@ class LedClock:
         last_minute_for_btc = -1
         while True:
             now = datetime.datetime.now()
-            if now.minute % 2 == 0 and last_minute_for_btc != now.minute:
+            if now.minute % 20 == 0 and last_minute_for_btc != now.minute:
                 last_minute_for_btc = now.minute
                 self._show_btc()
             elif not self.network and now.second % 5 == 0:
