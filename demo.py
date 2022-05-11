@@ -77,14 +77,13 @@ class LedClock:
                 sleep(0.5)
 
     def _show_time(self, now):
-        # h1 = self.str_if_not_zero(now.hour // 10)
-        # h2 = str(now.hour % 10)
-        # m1 = str(now.minute // 10)
-        # m2 = str(now.minute % 10)
-        # show_dots = now.second % 2 == 1
-        # dots_str = '.' if show_dots else ''
-        # self.show(h1, h2, m1 + dots_str, m2 + dots_str)
-        self.show(*'Omry')
+        h1 = self.str_if_not_zero(now.hour // 10)
+        h2 = str(now.hour % 10)
+        m1 = str(now.minute // 10)
+        m2 = str(now.minute % 10)
+        show_dots = now.second % 2 == 1
+        dots_str = '.' if show_dots else ''
+        self.show(h1, h2, m1 + dots_str, m2 + dots_str)
         sleep(0.2)
 
     def _show_no_network(self):
