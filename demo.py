@@ -84,7 +84,7 @@ class LedClock:
         # show_dots = now.second % 2 == 1
         # dots_str = '.' if show_dots else ''
         # self.show(h1, h2, m1 + dots_str, m2 + dots_str)
-        self.show(*'yair')
+        self.show(*'Omry')
         sleep(0.2)
 
     def _show_no_network(self):
